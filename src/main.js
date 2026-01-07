@@ -1,62 +1,44 @@
-// Variables globales
-let btnCalcular, btnEscenarios, form;
-
 function init() {
-  console.log("Iniciando aplicación...");
+  // 1. Recorrer array de números
+  const numeros = [1, 2, 3, 4, 5];
+  let mayoresQueTres = 0;
 
-  // Configurar navegación básica
-  btnCalcular = document.querySelector('[data-tab="calcular"]');
-  btnEscenarios = document.querySelector('[data-tab="escenarios"]');
+  for (let i = 0; i < numeros.length; i++) {
+    console.log(numeros[i] * 2);
+    if (numeros[i] > 3) {
+      mayoresQueTres++;
+    }
+  }
 
-  btnCalcular.addEventListener("click", () => {
-    console.log("Tab: Calcular");
-  });
+  console.log('Números mayores que 3:', mayoresQueTres);
 
-  btnEscenarios.addEventListener("click", () => {
-    console.log("Tab: Escenarios");
-  });
+  // 2. Generar tabla de amortización
+  const schedule = [];
+  const total = 100000;
 
-  // Configurar formulario
-  form = document.getElementById("calc-form");
-  form.addEventListener("submit", handleFormSubmit);
+  for (let i = 0; i < 12; i++) {
+    schedule.push({
+      mes: i + 1,
+      fecha: new Date(2024, i, 1),
+      cuota: 1000,
+      interes: 100,
+      capital: 900,
+      saldo: total - (900 * i)
+    });
+  }
 
-  console.log("Aplicación cargada correctamente");
+  // 3. Mostrar resultados en el DOM
+  const resultsDiv = document.getElementById('calc-results');
+  const contentDiv = document.getElementById('results-content');
+
+  for (const item of schedule) {
+    const p = document.createElement('p');
+    p.textContent =
+      `Mes ${item.mes} - Cuota: ${item.cuota}€ - Interés: ${item.interes}€ - Capital: ${item.capital}€ - Saldo: ${item.saldo}€`;
+    contentDiv.appendChild(p);
+  }
+
+  resultsDiv.classList.remove('hidden');
 }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-  const precio = parseFloat(formData.get("precio"));
-  const plazo = parseFloat(formData.get("plazo"));
-  const interes = parseFloat(formData.get("interes"));
-
-  // ✅ Validar campos requeridos (según enunciado)
-  let isValid = true;
-
-  if (precio <= 0) {
-    isValid = false;
-  }
-
-  if (plazo < 1 || plazo > 50) {
-    isValid = false;
-  }
-
-  if (interes < 0 || interes > 20) {
-    isValid = false;
-  }
-
-  // ✅ Mostrar/ocultar secciones
-  const resultsDiv = document.getElementById("calc-results");
-
-  if (isValid) {
-    resultsDiv.classList.remove("hidden");
-    console.log("Cálculo válido.");
-  } else {
-    resultsDiv.classList.add("hidden");
-    console.log("Errores encontrados.");
-  }
-}
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener('DOMContentLoaded', init);
