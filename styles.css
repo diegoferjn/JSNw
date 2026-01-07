@@ -1,4 +1,94 @@
 body {
   font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
+}
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+  margin-right: 5px;
+}
+.tab-btn.active {
+  background: #007bff;
+  color: white;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0056b3;
+}
+.hidden {
+  display: none;
+}
+.error {
+  color: red;
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffe6e6;
+  border: 1px solid #ffcccc;
+  border-radius: 4px;
+}
+#calc-results {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+.item-card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: white;
+}
+.item-card h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+.item-actions {
+  margin-top: 10px;
+}
+.item-actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.item-actions button:last-child {
+  background: #dc3545;
+}
+.item-actions button:last-child:hover {
+  background: #c82333;
 }
