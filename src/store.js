@@ -1,16 +1,27 @@
-// Función asíncrona para cargar datos
-export async function loadSeedData() {
-  try {
-    const response = await fetch('./data/seed-scenarios.json');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-    return [];
-  }
+// Guardar datos en localStorage
+export function saveToLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }
 
-// Función de delay
-export function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+// Cargar datos desde localStorage
+export function loadFromLocalStorage(key) {
+  const stored = localStorage.getItem(key);
+  return stored ? JSON.parse(stored) : null;
+}
+
+// Estado inicial
+export function initState() {
+  return {
+    datos: [],
+    contador: 0
+  };
+}
+
+// Añadir datos al estado
+export function addData(dato) {
+  const state = loadFromLocalStorage('hipocalc:v1') || initState();
+  state.datos.push(dato);
+  state.contador++;
+  saveToLocalStorage('hipocalc:v1', state);
+  return state;
 }

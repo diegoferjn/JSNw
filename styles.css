@@ -1,8 +1,4 @@
-.hidden {
-  display: none;
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }

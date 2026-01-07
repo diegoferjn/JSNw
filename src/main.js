@@ -1,38 +1,22 @@
-import {
-  calcularPrincipal,
-  esValidoInteres,
-  esValidoPlazo,
-  calcularCuotaMensual,
-  formatearMoneda
-} from './loans.js';
-
-import { loadSeedData, delay } from './store.js';
-
-let form;
+import { loadFromLocalStorage, initState, addData } from './store.js';
 
 function init() {
-  cargarDatosIniciales();
-}
+  console.log('Iniciando aplicación...');
 
-async function cargarDatosIniciales() {
-  try {
-    await delay(500);
-    const datos = await loadSeedData();
-    mostrarEscenarios(datos);
-  } catch (error) {
-    const errorDiv = document.getElementById('error-messages');
-    errorDiv.innerHTML = '<div class="error">Error al cargar datos iniciales</div>';
-  }
-}
+  // Cargar datos al iniciar
+  let estado = loadFromLocalStorage('hipocalc:v1');
 
-function mostrarEscenarios(escenarios) {
-  const section = document.getElementById('escenarios');
-
-  if (escenarios.length > 0) {
-    section.innerHTML += `<p>Se cargaron ${escenarios.length} escenarios</p>`;
+  if (!estado) {
+    console.log('No hay datos en localStorage, inicializando estado');
+    estado = initState();
+    console.log('Estado inicial:', estado);
   } else {
-    section.innerHTML += `<p>No hay escenarios disponibles</p>`;
+    console.log('Datos cargados desde localStorage:', estado);
   }
+
+  // Añadir un dato de ejemplo
+  const nuevoEstado = addData('Dato de ejemplo');
+  console.log('Estado actualizado:', nuevoEstado);
 }
 
 document.addEventListener('DOMContentLoaded', init);
