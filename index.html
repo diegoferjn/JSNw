@@ -2,38 +2,18 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Préstamo</title>
+  <title>Errores y Asincronía</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>Calculadora de Préstamo</h1>
-
-<form id="calc-form">
-  <label>
-    Precio:
-    <input type="number" name="precio" required>
-  </label>
-
-  <label>
-    Porcentaje:
-    <input type="number" name="porcentaje" required>
-  </label>
-
-  <label>
-    Plazo (años):
-    <input type="number" name="plazo" required>
-  </label>
-
-  <label>
-    Interés anual:
-    <input type="number" name="interes" step="0.01" required>
-  </label>
-
-  <button type="submit">Calcular</button>
-</form>
+<h1>Calculadora de Hipoteca</h1>
 
 <div id="error-messages"></div>
+
+<section id="escenarios" class="tab-content">
+  <h2>Escenarios guardados</h2>
+</section>
 
 <div id="calc-results" class="hidden">
   <div id="results-content"></div>

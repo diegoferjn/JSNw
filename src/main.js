@@ -2,73 +2,37 @@ import {
   calcularPrincipal,
   esValidoInteres,
   esValidoPlazo,
-  calcularCuotaMensual
+  calcularCuotaMensual,
+  formatearMoneda
 } from './loans.js';
+
+import { loadSeedData, delay } from './store.js';
 
 let form;
 
 function init() {
-  form = document.getElementById('calc-form');
-  form.addEventListener('submit', handleFormSubmit);
+  cargarDatosIniciales();
 }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-
-  const precio = parseFloat(formData.get('precio'));
-  const porcentaje = parseFloat(formData.get('porcentaje'));
-  const plazo = parseFloat(formData.get('plazo'));
-  const interes = parseFloat(formData.get('interes'));
-
-  let isValid = true;
-  let errores = [];
-
-  if (precio <= 0) {
-    isValid = false;
-    errores.push('Precio inválido');
+async function cargarDatosIniciales() {
+  try {
+    await delay(500);
+    const datos = await loadSeedData();
+    mostrarEscenarios(datos);
+  } catch (error) {
+    const errorDiv = document.getElementById('error-messages');
+    errorDiv.innerHTML = '<div class="error">Error al cargar datos iniciales</div>';
   }
-
-  if (!esValidoPlazo(plazo)) {
-    isValid = false;
-    errores.push('Plazo inválido');
-  }
-
-  if (!esValidoInteres(interes)) {
-    isValid = false;
-    errores.push('Interés inválido');
-  }
-
-  if (porcentaje <= 0 || porcentaje > 100) {
-    isValid = false;
-    errores.push('Porcentaje inválido');
-  }
-
-  const resultsDiv = document.getElementById('calc-results');
-  const errorDiv = document.getElementById('error-messages');
-
-  if (!isValid) {
-    resultsDiv.classList.add('hidden');
-    errorDiv.innerHTML = `<div class="error">${errores[0]}</div>`;
-    return;
-  }
-
-  const principal = calcularPrincipal(precio, porcentaje);
-  const cuota = calcularCuotaMensual(principal, interes, plazo * 12);
-
-  mostrarResultados(principal, cuota);
 }
 
-function mostrarResultados(principal, cuota) {
-  const resultsDiv = document.getElementById('calc-results');
-  const resultsContent = document.getElementById('results-content');
+function mostrarEscenarios(escenarios) {
+  const section = document.getElementById('escenarios');
 
-  resultsDiv.classList.remove('hidden');
-  resultsContent.innerHTML = `
-    <p><strong>Principal:</strong> ${principal}</p>
-    <p><strong>Cuota mensual:</strong> ${cuota.toFixed(2)}</p>
-  `;
+  if (escenarios.length > 0) {
+    section.innerHTML += `<p>Se cargaron ${escenarios.length} escenarios</p>`;
+  } else {
+    section.innerHTML += `<p>No hay escenarios disponibles</p>`;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);

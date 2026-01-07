@@ -1,1 +1,4 @@
-[]
+[
+  { "nombre": "Escenario ejemplo 1" },
+  { "nombre": "Escenario ejemplo 2" }
+]
