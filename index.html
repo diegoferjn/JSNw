@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Tipos complejos</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Hipoteca</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <h1>Calculadora de Hipoteca</h1>
+  <h1>Calculadora hipoteca</h1>
 
   <div class="tabs">
-    <button data-tab="calcular">Calcular</button>
-    <button data-tab="escenarios">Escenarios</button>
+    <button class="tab-btn" data-tab="calcular">Calcular</button>
+    <button class="tab-btn" data-tab="escenarios">Escenarios</button>
   </div>
 
-  <form id="calc-form">
-    <input type="number" name="precio" placeholder="Precio vivienda">
-    <input type="number" name="porcentaje" placeholder="Porcentaje financiación">
-    <input type="number" name="plazo" placeholder="Plazo">
-    <input type="number" name="interes" placeholder="Interés">
-    <input type="month" name="fecha">
-    <button type="submit">Enviar</button>
-  </form>
+  <section id="calcular" class="tab-content active">
+    <form id="calc-form">
+      <div class="form-group">
+        <label for="precio">Precio vivienda (€):</label>
+        <input type="number" id="precio" name="precio" min="0" step="1000" required />
+      </div>
 
-  <script src="./src/main.js"></script>
+      <div class="form-group">
+        <label for="porcentaje">Porcentaje financiación (%):</label>
+        <input type="number" id="porcentaje" name="porcentaje" min="1" max="100" step="1" required />
+      </div>
+
+      <div class="form-group">
+        <label for="plazo">Plazo (años):</label>
+        <input type="number" id="plazo" name="plazo" min="1" max="50" step="1" required />
+      </div>
+
+      <div class="form-group">
+        <label for="interes">Interés anual (%):</label>
+        <input type="number" id="interes" name="interes" min="0" max="20" step="0.01" required />
+      </div>
+
+      <div class="form-group">
+        <label for="fecha">Fecha inicio:</label>
+        <input type="month" id="fecha" name="fecha" required />
+      </div>
+
+      <button type="submit">Calcular</button>
+    </form>
+
+    <!-- Sección de resultados (empieza oculta) -->
+    <div id="calc-results" class="hidden">
+      <h3>Resultados del cálculo</h3>
+      <p>Aquí aparecerán los resultados</p>
+    </div>
+  </section>
+
+  <section id="escenarios" class="tab-content">
+    <h2>Escenarios guardados</h2>
+  </section>
+
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>
