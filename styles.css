@@ -2,6 +2,7 @@
   display: none;
 }
 
-.tab-content.active {
-  display: block;
+.error {
+  color: red;
+  margin-top: 10px;
 }
